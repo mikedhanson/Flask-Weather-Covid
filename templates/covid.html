@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>How's the covid?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.css" />
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title"> How's the covid? </h1>
+                <ul><a href="/"> < Back Home </a>
+            </div>
+        </div>
+    </section>
+
+    <!--
+        <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                
+                    <form method="POST">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <input class="input" name="covid_data_location" type="text" placeholder="City Name">
+                            </div>
+                            <div class="control">
+                                <button class="button is-info">
+                                    Get Data
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        <div class="field has-addons">
+                            <select name="country_select">
+                                {% for loc in covid_locations %}
+                                    <option value="{{loc}}" SELECTED>{{loc}}</option>"
+                                {% endfor %}
+                            </select>
+                            <div class="control">
+                                <button class="button is-info">
+                                    Get Data
+                                </button>
+                            </div>
+                        </div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% set message_class = 'is-success' %}
+
+                        {% if category == 'error' %}
+                        {% set message_class = 'is-danger' %}
+                        {% endif %}
+                        <div class="notification {{ message_class }}">{{ message }}</div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section" style="margin:auto;">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for covid in covid_data %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title"> {{ covid.countryName }} Stats</span>
+                                        <br>
+                                        <br> Confirmed: {{ covid.confirmed }}
+                                        <br> Deaths: {{ covid.deaths }}
+                                        <br> Recovered: {{ covid.recovered }}
+                                        <br> Population: {{ covid.population }}
+                                    </p>
+                                </div>
+                    
+                            </div>
+                        </article>
+                    </div>
+                    <br> Coordinates: {{ covid.coordinates }}
+                    <br> Updated: {{ covid.last_updated }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Site footer -->
+    <footer class="section">
+        <div class="column" style="float: left; width: 50%">
+            <h6>About</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet
+                pulvinar odio ac commodo. </p>
+        </div>
+
+        <div class="column" style="float: right; width: 50%">
+            <h6>Quick Links</h6>
+            <ul>
+                <li><a href="https://michaelhanson.dev/about/">About me</a></li>
+                <li><a href="https://michaelhanson.dev/contact/">Contact me</a></li>
+                <li><a href="https://michaelhanson.dev/privacy-policy/">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>

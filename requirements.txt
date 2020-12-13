@@ -1,0 +1,4 @@
+flask
+requests
+COVID19Py
+Flask-SQLAlchemy
