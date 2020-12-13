@@ -26,7 +26,7 @@ PORT            - Graylog port (ie. 5000)
 
 ```bash 
 
-sudo docker run -p 5000:5000 -e WeatherAPIToken='b61b0538548fdb1deb898b71768db857' docker_img_name
+sudo docker run -p 5000:5000 -e WeatherAPIToken='b61b05385333db1deb123b71768db857' docker_img_name
 
 ```
 
